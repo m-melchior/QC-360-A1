@@ -26,7 +26,7 @@
  *   copyright            : (c) 2016 by Michael Melchior
  *   description          : An application to scan 2.4Ghz Channels for activity
  *
-*/
+ */
 
 /* 
  * This program is using the Optimized High Speed NRF24L01+ Driver Class
@@ -34,15 +34,22 @@
  * licensed under the GNU GPL v2 license.
  * It can be found in Js' github repository under http://tmrh20.github.io/RF24/index.html.
  * Check the License.txt for more information.
-*/
- 
+ */
+
+/* todo:
+ * add user input for changing min / max channels to  minimize compiling / flashing cycles for each change
+ */
+
 #include "printf.h"
 #include "RF24.h"
 
-// Uno
-RF24 myRF24(9, 10);
-// Mega 2560
-//RF24 myRF24(49, 53);
+// had two boards for testing, one UNO and a Mega2560
+// and was too lazy to comment / uncomment all the time
+#if defined(__AVR_ATmega2560__)
+	RF24 myRF24(49, 53);
+#elif defined(__AVR_ATmega328P__)
+	RF24 myRF24(9, 10);
+#endif
 
 // range of channels to scan
 const uint8_t minChannels = 0;
