@@ -28,7 +28,7 @@
 #ifndef __myRF24SPISpySpecialOutput_H__
 #define __myRF24SPISpySpecialOutput_H__
 
-#include "BK2421.h"
+#include "myRF24SpiSpyDefinintions.h"
 
 void outSETUP_RETR(uint8_t valueIn) {
 	byte arcValue = valueIn & 0b1111;
@@ -52,53 +52,53 @@ void outSETUP_RETR(uint8_t valueIn) {
 
 
 void outData(byte bufferIndexIn, byte registerIndexIn) {
-	Serial.println(bk2421RegisterNames[registerIndexIn]);
+	Serial.println(RF24_REGISTER_NAMES[registerIndexIn]);
 
 	switch (registerIndexIn) {
-		case BK2421_CONFIG: // 00 CONFIG
+		case RF24_CONFIG: // 00 CONFIG
 			for (int i=0; i<8; i++) {
-				Serial.println(bk2421CONFIG[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+				Serial.println(RF24_CONFIG_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 			}
 			break;
-		case BK2421_EN_AA: // 01 EN_AA
+		case RF24_EN_AA: // 01 EN_AA
 			for (int i=0; i<8; i++) {
-				Serial.println(bk2421ENAA[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+				Serial.println(RF24_ENAA_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 			}
 			break;
-		case BK2421_EN_RXADDR: // 02 EN_RXADDR
+		case RF24_EN_RXADDR: // 02 EN_RXADDR
 			for (int i=0; i<8; i++) {
-				Serial.println(bk2421EN_RXADDR[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+				Serial.println(RF24_EN_RXADDR_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 			}
 			break;
-		case BK2421_SETUP_AW: // 03 SETUP_AW
+		case RF24_SETUP_AW: // 03 SETUP_AW
 			if (receiverBuffer[bufferIndexIn][1] < 4) {
-				Serial.println(bks2421SETUP_AW[receiverBuffer[bufferIndexIn][1]]);
+				Serial.println(RF24_SETUP_AW_NAMES[receiverBuffer[bufferIndexIn][1]]);
 			} else {
 				Serial.println(String(receiverBuffer[bufferIndexIn][1]) + " Reserved / not allowed!");
 			}
 			break;
-		case BK2421_SETUP_RETR: // 04 SETUP_RETR
+		case RF24_SETUP_RETR: // 04 SETUP_RETR
 			outSETUP_RETR(receiverBuffer[bufferIndexIn][1]);
 			break;
-		case BK2421_RF_CH: // 05 RF_CH
+		case RF24_RF_CH: // 05 RF_CH
 			Serial.println(String(receiverBuffer[bufferIndexIn][1]));
 			break;
-		case BK2421_RF_SETUP: // 06 RF_SETUP
+		case RF24_RF_SETUP: // 06 RF_SETUP
 			for (int i=0; i<8; i++) {
 				if (i != 1 && i != 2) {
-					Serial.println(bks2421RF_SETUP[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+					Serial.println(RF24_RF_SETUP_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 				} else if (i == 1) { // if (i != 1 && != 2) {
 					byte rfPwrIndex = receiverBuffer[bufferIndexIn][1] & 0b00000110;
 					rfPwrIndex = (rfPwrIndex >> 1);
-					Serial.println("RF_PWR: " + bk2421RF_PWR[rfPwrIndex]);
+					Serial.println("RF_PWR: " + RF24_RF_PWR_NAMES[rfPwrIndex]);
 				} // if (i != 1 && != 2) {
 			} // for (int i=0; i<8; i++) {
 			break;
 
-		case BK2421_STATUS: // 07 STATUS
+		case RF24_STATUS: // 07 STATUS
 			for (int i=0; i<8; i++) {
 				if (i < 1 || i > 3) {
-					Serial.println(bks2421STATUS[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+					Serial.println(RF24_STATUS_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 				} else if (i == 1) { // if (i != 1 && != 2) {
 					byte rx_p_no = receiverBuffer[bufferIndexIn][1] & 0b00001110;
 					rx_p_no = (rx_p_no >> 1);
@@ -119,19 +119,19 @@ void outData(byte bufferIndexIn, byte registerIndexIn) {
 
 		// 08 Read Only
 		// 09 Read Only
-		case BK2421_RX_ADDR_P0: // 0A RX_ADDR_P0
+		case RF24_RX_ADDR_P0: // 0A RX_ADDR_P0
 			printBytes(bufferIndexIn, true);
 			break;
-		case BK2421_RX_ADDR_P1: // 0B RX_ADDR_P1
+		case RF24_RX_ADDR_P1: // 0B RX_ADDR_P1
 			printBytes(bufferIndexIn, true);
 			break;
-		case BK2421_RX_ADDR_P2 ... BK2421_RX_ADDR_P5: // 0C RX_ADDR_P2 ... 0F RX_ADDR_P5
+		case RF24_RX_ADDR_P2 ... RF24_RX_ADDR_P5: // 0C RX_ADDR_P2 ... 0F RX_ADDR_P5
 			Serial.println(String(receiverBuffer[bufferIndexIn][1]));
 			break;
-		case BK2421_TX_ADDR: // 10 TX_ADDR
+		case RF24_TX_ADDR: // 10 TX_ADDR
 			printBytes(bufferIndexIn, true);
 			break;
-		case BK2421_RX_PW_P0 ... BK2421_RX_PW_P5: // 11 RX_PW_P0 ... 16 RX_PW_P5
+		case RF24_RX_PW_P0 ... RF24_RX_PW_P5: // 11 RX_PW_P0 ... 16 RX_PW_P5
 			if (receiverBuffer[bufferIndexIn][1] <= 32) {
 				Serial.println(String(receiverBuffer[bufferIndexIn][1]));
 			} else {
@@ -140,14 +140,14 @@ void outData(byte bufferIndexIn, byte registerIndexIn) {
 			break;
 		// 17 FIFO_STATUS Read Only
 		// 18 ... 1B N/A ?!?
-		case BK2421_DYNPD: // 1C DYNPD
+		case RF24_DYNPD: // 1C DYNPD
 			for (int i=0; i<8; i++) {
-				Serial.println(bks2421DYNPD[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+				Serial.println(RF24_DYNPD_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 			}
 			break;
-		case BK2421_FEATURE: // 1D FEATURE
+		case RF24_FEATURE: // 1D FEATURE
 			for (int i=0; i<8; i++) {
-				Serial.println(bks2421FEATURE[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
+				Serial.println(RF24_FEATURE_NAMES[i] + ": " + String((receiverBuffer[bufferIndexIn][1] >> i) & 1));
 			}
 			break;
 		default:
@@ -160,35 +160,35 @@ void processBuffer(byte bufferIndexIn) {
 	uint8_t command = receiverBuffer[bufferIndexIn][0];
 	
 	switch(command) {
-		case BK2421_NOP: // NOP
+		case RF24_NOP: // NOP
 			Serial.println("NOP");
 			break;
-		case BK2421_REUSE_TX_PL: // REUSE_TX_PL
+		case RF24_REUSE_TX_PL: // REUSE_TX_PL
 			Serial.println("REUSE_TX_PL");
 			break;
-		case BK2421_FLUSH_RX: // FLUSH_RX
+		case RF24_FLUSH_RX: // FLUSH_RX
 			Serial.println("FLUSH_RX");
 			break;
-		case BK2421_FLUSH_TX: // FLUSH_TX
+		case RF24_FLUSH_TX: // FLUSH_TX
 			Serial.println("FLUSH_TX");
 			break;
-		case BK2421_W_TX_PAYLOAD_NO_ACK: // W_TX_PAYLOAD_NO_ACK
+		case RF24_W_TX_PAYLOAD_NO_ACK: // W_TX_PAYLOAD_NO_ACK
 			Serial.println("W_TX_PAYLOAD_NO_ACK");
 			break;
-		case BK2421_W_ACK_PAYLOAD: // W_ACK_PAYLOAD
+		case RF24_W_ACK_PAYLOAD: // W_ACK_PAYLOAD
 			Serial.println("W_ACK_PAYLOAD");
 			break;
-		case BK2421_W_TX_PAYLOAD: // W_TX_PAYLOAD
+		case RF24_W_TX_PAYLOAD: // W_TX_PAYLOAD
 			Serial.println("W_ACK_PAYLOAD");
 			printBytes(bufferIndexIn, true);
 			break;
-		case BK2421_R_RX_PAYLOAD: // R_RX_PAYLOAD
+		case RF24_R_RX_PAYLOAD: // R_RX_PAYLOAD
 			Serial.println("R_RX_PAYLOAD");
 			break;
-		case BK2421_R_RX_PL_WID: // R_RX_PL_WID
+		case RF24_R_RX_PL_WID: // R_RX_PL_WID
 			Serial.println("R_RX_PL_WID");
 			break;
-		case BK2421_ACTIVATE: // ACTIVATE
+		case RF24_ACTIVATE: // ACTIVATE
 			Serial.print("ACTIVATE, ");
 			switch (receiverBuffer[bufferIndexIn][1]) {
 				case 83:
@@ -206,7 +206,7 @@ void processBuffer(byte bufferIndexIn) {
 			outData(bufferIndexIn, command - 32);
 			break;
 		case 0 ... 29:
-			Serial.println("R " + bk2421RegisterNames[command]);
+			Serial.println("R " + RF24_REGISTER_NAMES[command]);
 //			outData(bufferIndexIn, command);
 			break;
 		default:
