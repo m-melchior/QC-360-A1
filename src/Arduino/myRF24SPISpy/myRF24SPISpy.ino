@@ -155,3 +155,160 @@ void loop (void) {
 		initBuffer(i);
 	} // for (int i=0; i<totalNumberOfBuffers; i++) {
 }  // void loop (void) {
+
+//results in bytes:
+/*
+0
+32 12
+36 95
+6 255
+38 39
+6 255
+6 255
+6 255
+38 7
+6 255
+80 115
+61 0
+60 0
+39 112
+37 76
+226
+225
+0 255
+32 14
+0 255
+32 14
+37 60
+6 255
+38 7
+6 255
+33 0
+*/
+
+// results processing the data
+/*
+OK.
+R CONFIG
+
+W CONFIG
+PRIM_RX: 0
+PWR_UP: 0
+CRCO: 1
+EN_CRC: 1
+MASK_MAX_RT: 0
+MASK_TX_DS: 0
+MASK_RX_DR: 0
+Reserved: 0
+
+W SETUP_RETR
+15 retries
+Wait 1500 us
+
+R RF_SETUP
+
+W RF_SETUP
+LNA_HCURR: 1
+RF_PWR: 5 dBm
+RF_DR: 0
+Reserved: 0
+Reserved: 1
+Reserved: 0
+Reserved: 0
+
+R RF_SETUP
+
+R RF_SETUP
+
+R RF_SETUP
+
+W RF_SETUP
+LNA_HCURR: 1
+RF_PWR: 5 dBm
+RF_DR: 0
+Reserved: 0
+Reserved: 0
+Reserved: 0
+Reserved: 0
+
+R RF_SETUP
+
+ACTIVATE, Enabling / Disabling Registers
+
+R CONFIG
+
+W DYNPD
+DPL_P0: 0
+DPL_P1: 0
+DPL_P2: 0
+DPL_P3: 0
+DPL_P4: 0
+DPL_P5: 0
+Reserved: 0
+Reserved: 0
+
+W STATUS
+TX_FULL: 0
+pipe 0 available
+MAX_RT: 1
+TX_DS: 1
+RX_DR: 1
+RBANK: 0
+
+W RF_CH
+76
+
+FLUSH_RX
+
+FLUSH_TX
+
+R CONFIG
+
+W CONFIG
+PRIM_RX: 0
+PWR_UP: 1
+CRCO: 1
+EN_CRC: 1
+MASK_MAX_RT: 0
+MASK_TX_DS: 0
+MASK_RX_DR: 0
+Reserved: 0
+
+NOP
+
+W CONFIG
+PRIM_RX: 0
+PWR_UP: 1
+CRCO: 1
+EN_CRC: 1
+MASK_MAX_RT: 0
+MASK_TX_DS: 0
+MASK_RX_DR: 0
+Reserved: 0
+
+W RF_CH
+60
+
+R RF_SETUP
+
+W RF_SETUP
+LNA_HCURR: 1
+RF_PWR: 5 dBm
+RF_DR: 0
+Reserved: 0
+Reserved: 0
+Reserved: 0
+Reserved: 0
+
+R RF_SETUP
+
+W EN_AA
+ENAA_P0: 0
+ENAA_P1: 0
+ENAA_P2: 0
+ENAA_P3: 0
+ENAA_P4: 0
+ENAA_P5: 0
+Reserved: 0
+Reserved: 0
+*/
