@@ -1,5 +1,5 @@
 /* myRF24Scanner
- * Copyright (C) 2016 Michael Melchior <MelchiorMichael@web.de>
+ * Copyright (C) 2016 Michael Melchior <Michael.MelchiorGM@gmail.com>
  *
  * This program is based on an example for the RF24 library
  * written by J. Coliz and licensed under GNU GPL v2
