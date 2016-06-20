@@ -1,5 +1,5 @@
 /* myRF24PromiscuousReceiver
- * Copyright (C) 2016 Michael Melchior <MelchiorMichael@web.de>
+ * Copyright (C) 2016 Michael Melchior <Michael.MelchiorGM@gmail.com>
  *
  * This program is inspired by a post of Travis Goodspeed on 
  * intercepting the transmission of a 2.4GHz wireless keyboard with a nrf2410 
