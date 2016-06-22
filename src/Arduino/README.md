@@ -1,4 +1,4 @@
-**myRF24PromiscuousReceiver**
+[**myRF24PromiscuousReceiver**](/myRF24PromiscuousReceiver)
 
 nRF24L01+ in promiscuous mode as used in [Step 3](https://mmelchior.wordpress.com/2016/06/06/qc-360-a1-p1/#step3) of the project
 
